@@ -1,13 +1,24 @@
-# -*- coding: utf-8 -*-
+"""Module containing the core objects used by the Gilded Rose."""
 
-class GildedRose(object):
 
-    def __init__(self, items):
+class GildedRose:
+    """Represent the Gilded Rose Inn."""
+
+    def __init__(self, items: list["Item"]) -> None:
         self.items = items
 
-    def update_quality(self):
+    def update_quality(self) -> None:
+        """Update the quality for all items in the Gilded Rose.
+
+        References
+        ----------
+        See `GildedRoseRequirements.txt` for more information on this method.
+        """
         for item in self.items:
-            if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert":
+            if (
+                item.name != "Aged Brie"
+                and item.name != "Backstage passes to a TAFKAL80ETC concert"
+            ):
                 if item.quality > 0:
                     if item.name != "Sulfuras, Hand of Ragnaros":
                         item.quality = item.quality - 1
@@ -37,10 +48,13 @@ class GildedRose(object):
 
 
 class Item:
-    def __init__(self, name, sell_in, quality):
+    """Represent an Item that is available in the Gilded Rose Inn."""
+
+    def __init__(self, name: str, sell_in: int, quality: int) -> None:
         self.name = name
         self.sell_in = sell_in
         self.quality = quality
 
-    def __repr__(self):
+    def __repr__(self) -> str:
+        """Return a human-friendly representation of an Item."""
         return "%s, %s, %s" % (self.name, self.sell_in, self.quality)
