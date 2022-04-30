@@ -1,0 +1,67 @@
+[tool.poetry]
+name = "gildedrose_refactoring"
+version = "0.0.1"
+description = "An attempt at the Gilded Rose Refactoring Kata."
+authors = ["Sonny Valkeneers <sonny@softllama.net>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9.0"
+
+[tool.poetry.dev-dependencies]
+bandit = "^1.7.1"
+black = "^21.12b0"
+commitizen = "^2.20.3"
+cruft = "^2.10.1"
+flake8-bugbear = "^21.11.29"
+flake8-pytest-style = "^1.6.0"
+freezegun = "^1.1.0"
+isort = "^5.10.1"
+mypy = "^0.931"
+pep8-naming = "^0.12.1"
+pre-commit = "^2.16.0"
+proselint = "^0.13.0"
+pydocstyle = "^6.1.1"
+pytest = "^6.2.5"
+pytest-cov = "^3.0.0"
+pytest-mock = "^3.6.1"
+safety = "^1.10.3"
+shellcheck-py = "^0.8.0"
+toml = "^0.10.2"
+types-freezegun = "^1.1.5"
+types-setuptools = "^57.4.6"
+types-toml = "^0.10.2"
+vulture = "^2.3"
+
+[build-system]
+requires = ["poetry>=1.1.4"]
+build-backend = "poetry.masonry.api"
+
+[tool.black]
+line-length = 100
+
+[tool.isort]
+profile = "black"
+
+[tool.commitizen]
+annotated_tag = true
+bump_message = "bump: $current_version → $new_version [skip-ci]"
+name = "cz_conventional_commits"
+tag_format = "v$version"
+update_changelog_on_bump = true
+version = "0.0.1"
+version_files = [
+    "pyproject.toml:version",
+    "gildedrose_refactoring/__init__.py"
+]
+
+[tool.pydocstyle]
+convention = "numpy"
+
+[tool.coverage.run]
+branch = true
+
+[tool.coverage.report]
+exclude_lines = ["pragma: no cover"]
+omit = ["*tests*"]
