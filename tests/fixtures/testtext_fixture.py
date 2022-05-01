@@ -4,10 +4,9 @@ References
 ----------
 See `https://texttest.org/` for more information on texttests.
 """
-from __future__ import print_function
-
 import json
-from collections import defaultdict
+import os
+from datetime import datetime, timezone
 from pathlib import Path
 
 from gildedrose_refactoring.gilded_rose import GildedRose, Item
@@ -15,7 +14,8 @@ from tests.test_gilded_rose import destructure
 
 
 def _write(items):
-    path = Path(__file__).parent / "gilded_items.json"
+    utc_now_timestamp = int(datetime.now(tz=timezone.utc).timestamp())
+    path = Path(__file__).parent / f"gilded_items_{utc_now_timestamp}.json"
     if path.exists():
         input_ = input(f"The file {path} already exists, ok to overwrite? (y/N)")
         if input_.lower() not in ["yes", "y"]:
@@ -46,14 +46,16 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         days = int(sys.argv[1]) + 1
 
-    result = defaultdict(list)
+    result: dict[str, list[dict]] = {}
     for day in range(days):
-        print("-------- day %s --------" % day)
+        day_str = str(day)
+        result[day_str] = [destructure(item) for item in items]
+        print(f"-------- day {day_str} --------")
         print("name, sellIn, quality")
         for item in items:
             print(item)
         print("")
-        result[day] = [destructure(item) for item in items]
         GildedRose(items).update_quality()
 
-    _write(result)
+    if os.environ.get("WRITE"):
+        _write(result)
