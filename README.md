@@ -27,7 +27,25 @@ gildedrose-refactoring uses Poetry to manage the virtual environments. This make
 
 ##### Tip: This repository ships with an install script (./scripts/install.sh) which will run above commands for you
 
+## Run the tests
+The tests can be run locally, but this means you would need to install python 3.10, poetry and follow steps above to install the application.
+
+If you have docker installed, this repository includes a Dockerfile which just builds and installs the project inside the container.
+
+### Run locally
+`./scripts/done.sh`
+
+OR
+### Build the container
+`docker build .`
+
+### Run a disposable container and open a bash shell inside
+`docker run --rm -it <container-id> bash`
+
+### To prevent the container from being disposed, run the following instead
+`docker exec -it <container-id> bash`
+
 ---
-[Read Latest Documentation](https://shifqu.github.io/gildedrose-refactoring/) - [Browse GitHub Code Repository](https://github.com/shifqu/gildedrose-refactoring/)
+[Browse GitHub Code Repository](https://github.com/shifqu/gildedrose-refactoring/)
 
 ---
