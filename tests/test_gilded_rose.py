@@ -7,9 +7,24 @@ import pytest
 from gildedrose_refactoring.gilded_rose import GildedRose, Item
 
 
-@pytest.fixture(name="gilded_rose")
-def fixture_gilded_rose(items: list[Item]) -> GildedRose:
-    return GildedRose(items)
+@pytest.fixture(name="conjured_item")
+def fixture_conjured_item() -> Item:
+    return Item("Conjured health potion", 5, 40)
+
+
+@pytest.fixture(name="conjured_item_progress_multiple_days")
+def fixture_conjured_item_progress_multiple_days(conjured_item: Item) -> dict[str, Item]:
+    name = conjured_item.name
+    return {
+        "0": Item(name, 5, 40),
+        "1": Item(name, 4, 38),
+        "2": Item(name, 3, 36),
+        "3": Item(name, 2, 34),
+        "4": Item(name, 1, 32),
+        "5": Item(name, 0, 30),
+        "6": Item(name, -1, 26),
+        "7": Item(name, -2, 22),
+    }
 
 
 @pytest.fixture(name="items")
@@ -38,7 +53,7 @@ def fixture_items_after_update() -> list[Item]:
         Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=14, quality=21),
         Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=9, quality=50),
         Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=4, quality=50),
-        Item(name="Conjured Mana Cake", sell_in=2, quality=5),  # <-- :O
+        Item(name="Conjured Mana Cake", sell_in=2, quality=4),
     ]
 
 
@@ -72,9 +87,9 @@ def _assert_item_eq(item1: Item, item2: Item) -> None:
     assert item1.quality == item2.quality
 
 
-def test_update_quality(gilded_rose: GildedRose, items_after_update: list[Item]) -> None:
-    gilded_rose.update_quality()
-    assert_items_eq(gilded_rose.items, items_after_update)
+def test_update_quality(items: list[Item], items_after_update: list[Item]) -> None:
+    GildedRose(items).update_quality()
+    assert_items_eq(items, items_after_update)
 
 
 def test_update_multiple_days(items: list[Item], items_json: dict[str, list[dict]]) -> None:
@@ -100,3 +115,11 @@ def test_update_multiple_days(items: list[Item], items_json: dict[str, list[dict
 def test_item_repr():
     item = Item("Test", 1, 1)
     assert str(item) == "Test, 1, 1"
+
+
+def test_conjured_items(conjured_item: Item, conjured_item_progress_multiple_days: dict[str, Item]):
+    items = [conjured_item]
+    for day in conjured_item_progress_multiple_days.keys():
+        item = items[0]
+        _assert_item_eq(item, conjured_item_progress_multiple_days[day])
+        GildedRose(items).update_quality()
