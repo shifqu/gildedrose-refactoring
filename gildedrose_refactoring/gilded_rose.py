@@ -22,6 +22,12 @@ class GildedItem:
             return True
         return False
 
+    def is_conjured(self) -> bool:
+        """Check if the item's quality should degrade twice as fast."""
+        if self.name.startswith("Conjured"):
+            return True
+        return False
+
     def is_expired(self) -> bool:
         """Check if the item's sell_in is negative."""
         if self.sell_in < 0:
@@ -51,6 +57,8 @@ class GildedItem:
 
         if self.is_better_with_age():
             new_quality = self.quality + quality_modifier
+        elif self.is_conjured():
+            new_quality = self.quality - (quality_modifier * 2)
         else:
             new_quality = self.quality - quality_modifier
         self._update_quality(new_quality)
