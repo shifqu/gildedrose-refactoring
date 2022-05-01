@@ -89,7 +89,7 @@
     },
     {
       "name": "Conjured Mana Cake",
-      "quality": 5,
+      "quality": 4,
       "sell_in": 2
     }
   ],
@@ -465,7 +465,7 @@
     },
     {
       "name": "Conjured Mana Cake",
-      "quality": 4,
+      "quality": 2,
       "sell_in": 1
     }
   ],
@@ -512,7 +512,7 @@
     },
     {
       "name": "Conjured Mana Cake",
-      "quality": 3,
+      "quality": 0,
       "sell_in": 0
     }
   ],
@@ -559,7 +559,7 @@
     },
     {
       "name": "Conjured Mana Cake",
-      "quality": 1,
+      "quality": 0,
       "sell_in": -1
     }
   ],
