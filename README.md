@@ -3,7 +3,7 @@ An attempt at the Gilded Rose Refactoring Kata.
 
 ---
 
-[![Test Status](https://github.com/shifqu/gildedrose-refactoring/workflows/Test/badge.svg?branch=develop)](https://github.com/shifqu/gildedrose-refactoring/actions?query=workflow%3ATest)
+[![Test Status](https://github.com/shifqu/gildedrose-refactoring/actions/workflows/test.yml/badge.svg)](https://github.com/shifqu/gildedrose-refactoring/actions?query=workflow%3ATest)
 [![License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://pypi.python.org/pypi/gildedrose-refactoring/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat)](https://pycqa.github.io/isort/)

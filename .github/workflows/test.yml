@@ -26,5 +26,8 @@ jobs:
           python -m pip install --upgrade poetry
           poetry install
 
+      - name: Lint
+        run: ./scripts/lint.sh
+
       - name: Test
         run: ./scripts/test.sh
